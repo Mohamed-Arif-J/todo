@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>update</title>
+    <link rel="stylesheet" href="{% static 'form.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>todo list</h1>
+        <form method="POST" class="add-task-form">
+            {% csrf_token %}
+            <label>Enter the task</label>
+            <input type="text" name="task" placeholder="enter your task" value="{{ todo.task }}">
+            <label>Deadline</label>
+            <input type="date" name="date" value="{{ todo.date|date:'Y-m-d' }}">
+            <button type="submit">Save</button>
+        </form>
+    </div>
+</body>
+</html>

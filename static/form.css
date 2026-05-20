@@ -1,0 +1,140 @@
+.add-task-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+    margin: 0;
+    box-sizing: border-box;
+
+}
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    background-color: #fafafa;
+}
+
+.task-item.active {
+    border-color: #9fd8ad;
+    background-color: #f0fff4;
+}
+
+.task-info {
+    min-width: 0;
+}
+
+.task-title {
+    font-weight: bold;
+    color: #222;
+}
+
+.task-item.active .task-title {
+    color: #155724;
+    text-decoration: line-through;
+}
+
+.task-date {
+    margin-top: 4px;
+    font-size: 14px;
+    color: #666;
+}
+
+.complete-form {
+    margin: 0;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.checkbox-label input {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.status {
+    flex-shrink: 0;
+    padding: 5px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.completed {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.empty-list {
+    padding: 12px;
+    color: #666;
+    text-align: center;
+    border: 1px dashed #ccc;
+    border-radius: 5px;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}

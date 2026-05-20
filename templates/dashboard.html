@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'form.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>todo list</h1>
+        <form method="POST" class="add-task-form">
+            {% csrf_token %}
+            <label>Enter the task</label>
+            <input type="text" name="task" placeholder="enter your task">
+            <label>Deadline</label>
+            <input type="date" name="date">
+            <button type="submit">Add</button>
+            <a href="{% url 'logout' %}">logout</a>
+        </form>
+        <ul class="list">
+            {% for i in c %}
+                <li class="task-item {% if i.completed %}active{% endif %}">
+                    <div class="task-info">
+                        <p class="task-title">{{ i.task }}</p>
+                        <a href="{% url 'delete' i.id %}">Delete</a>
+                        <p class="task-date">Deadline: {{ i.date }}</p>
+                    </div>
+                    <form method="POST" class="complete-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="todo_id" value="{{ i.id }}">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="completed" {% if i.completed %}checked{% endif %} onchange="this.form.submit()">
+                            <span class="status {% if i.completed %}completed{% else %}pending{% endif %}">
+                                {% if i.completed %}Completed{% else %}Not completed{% endif %}
+                            </span>
+                        </label>
+                        <a href="{% url 'update'  %}">update</a>
+                    </form>
+                </li>
+            {% empty %}
+                <li class="empty-list">No tasks added yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+
+</html>
