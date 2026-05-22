@@ -4,19 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>update</title>
+    <title>Edit Task - TaskFlow</title>
     <link rel="stylesheet" href="{% static 'form.css' %}">
 </head>
 <body>
     <div class="container">
-        <h1>todo list</h1>
-        <form method="POST" class="add-task-form">
+        <h1>Edit Task</h1>
+        <p style="margin-bottom: 24px; font-size: 15px;">Modify task details and save changes.</p>
+        
+        <form method="POST">
             {% csrf_token %}
-            <label>Enter the task</label>
-            <input type="text" name="task" placeholder="enter your task" value="{{ todo.task }}">
-            <label>Deadline</label>
-            <input type="date" name="date" value="{{ todo.date|date:'Y-m-d' }}">
-            <button type="submit">Save</button>
+            <div class="form-group">
+                <label for="task">Task Description</label>
+                <input type="text" id="task" name="task" placeholder="Enter your task" value="{{ todo.task }}" required autofocus>
+            </div>
+            
+            <div class="form-group">
+                <label for="date">Deadline</label>
+                <input type="date" id="date" name="date" value="{{ todo.date|date:'Y-m-d' }}" required>
+            </div>
+            
+            <div class="update-actions">
+                <button type="submit" style="flex: 1;">Save Changes</button>
+                <a href="{% url 'dashboard' %}" class="btn-secondary" style="flex: 1; text-align: center;">Cancel</a>
+            </div>
         </form>
     </div>
 </body>

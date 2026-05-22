@@ -50,8 +50,10 @@ def update_task(request,id):
     if request.method == 'POST':
         a = request.POST.get('task')
         b = request.POST.get('date')
-        todo.save(task=a, date=b)
+        todo.task = a
+        todo.date = b
+        todo.save()
         return redirect('dashboard')
     return render(request,'update.html',{'todo': todo})
-    
+
 
