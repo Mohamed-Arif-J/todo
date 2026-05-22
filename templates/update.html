@@ -4,19 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Task - TaskFlow</title>
+    <title>Edit Task - Todo Tasks</title>
     <link rel="stylesheet" href="{% static 'form.css' %}">
 </head>
 <body>
     <div class="container">
         <h1>Edit Task</h1>
-        <p style="margin-bottom: 24px; font-size: 15px;">Modify task details and save changes.</p>
+        <p>Modify task details and save changes.</p>
         
         <form method="POST">
             {% csrf_token %}
             <div class="form-group">
                 <label for="task">Task Description</label>
-                <input type="text" id="task" name="task" placeholder="Enter your task" value="{{ todo.task }}" required autofocus>
+                <input type="text" id="task" name="task" placeholder="Task description" value="{{ todo.task }}" required autofocus>
             </div>
             
             <div class="form-group">
@@ -26,7 +26,7 @@
             
             <div class="update-actions">
                 <button type="submit" style="flex: 1;">Save Changes</button>
-                <a href="{% url 'dashboard' %}" class="btn-secondary" style="flex: 1; text-align: center;">Cancel</a>
+                <a href="{% url 'dashboard' %}" class="btn btn-secondary" style="flex: 1;">Cancel</a>
             </div>
         </form>
     </div>
