@@ -1,4 +1,6 @@
-/* Simple & Minimal CSS for Todo Tasks */
+/* Premium Monochrome CSS for Todo Tasks */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -6,301 +8,375 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-    background-color: #ffffff;
-    color: #000000;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #f3f4f6; /* Soft light-grey page background */
+    color: #18181b;
     line-height: 1.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
     padding: 20px;
 }
 
 .container {
-    max-width: 400px;
-    margin: 40px auto;
-    padding: 20px;
-    border: 1px solid #000000;
+    width: 100%;
+    max-width: 440px;
+    background-color: #0c0c0e; /* Solid dark/black card */
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #1c1c1f;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-/* Wide container for dashboard */
+/* Wide container for dashboard to match spacing */
 .container.dashboard-container {
-    max-width: 900px;
-    margin: 20px auto;
+    max-width: 460px;
 }
 
 h1 {
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 16px;
-    text-align: center;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+    text-align: left;
 }
 
 p {
     font-size: 14px;
-    color: #555555;
-    margin-bottom: 20px;
-    text-align: center;
+    color: #a1a1aa;
+    margin-bottom: 12px;
+    text-align: left;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
 }
 
 label {
     font-size: 13px;
     font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0.2px;
 }
 
 input[type="text"],
 input[type="password"],
 input[type="date"] {
     width: 100%;
-    padding: 8px;
-    border: 1px solid #000000;
+    padding: 12px 14px;
+    border: 1px solid #27272a;
+    border-radius: 8px;
     font-size: 14px;
     font-family: inherit;
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #18181b;
+    color: #ffffff;
+    transition: all 0.2s ease;
+}
+
+input[type="text"]::placeholder,
+input[type="password"]::placeholder {
+    color: #71717a;
 }
 
 input:focus {
-    outline: 2px solid #000000;
+    outline: none;
+    border-color: #ffffff;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.15);
 }
 
 button {
-    padding: 8px 12px;
+    padding: 12px 16px;
     font-size: 14px;
-    font-weight: 600;
-    background-color: #000000;
-    color: #ffffff;
-    border: 1px solid #000000;
+    font-weight: 700;
+    background-color: #ffffff;
+    color: #0c0c0e;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
     font-family: inherit;
-}
-
-button:hover {
-    background-color: #333333;
-}
-
-a {
-    color: #000000;
-    text-decoration: underline;
-}
-
-a:hover {
-    color: #555555;
-}
-
-/* Dashboard Styles */
-.dashboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid #000000;
-    padding-bottom: 12px;
-    margin-bottom: 20px;
-}
-
-.brand-name {
-    font-size: 20px;
-    font-weight: 700;
-}
-
-.user-actions {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-.welcome-msg {
-    font-size: 14px;
-}
-
-.btn-logout {
-    font-size: 13px;
-    padding: 4px 8px;
-    border: 1px solid #000000;
-    text-decoration: none;
-}
-
-.btn-logout:hover {
-    background-color: #f0f0f0;
-}
-
-/* Stats */
-.dashboard-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 20px;
-}
-
-.stat-card {
-    border: 1px solid #000000;
-    padding: 10px;
+    transition: all 0.2s ease;
     text-align: center;
 }
 
-.stat-value {
+button:hover {
+    background-color: #e4e4e7;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+a {
+    color: #a1a1aa;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+a:hover {
+    color: #ffffff;
+}
+
+/* Dashboard Header */
+.dashboard-header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.brand {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-name {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: #ffffff;
+    line-height: 1.1;
+}
+
+.brand-subtitle {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #a1a1aa;
+    margin-top: 2px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    margin-top: 4px;
+}
+
+.welcome-msg {
     font-size: 20px;
     font-weight: 700;
-    display: block;
+    color: #ffffff;
 }
 
-.stat-label {
-    font-size: 11px;
-    text-transform: uppercase;
-    color: #555555;
+.user-subtitle {
+    font-size: 13px;
+    color: #a1a1aa;
+    margin-top: 2px;
 }
 
-/* Grid Layout */
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 20px;
-}
-
-.card {
-    border: 1px solid #000000;
-    padding: 16px;
-}
-
-.card-title {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 12px;
-    border-bottom: 1px solid #000000;
-    padding-bottom: 4px;
+/* Stats (hidden in this simplified layout) */
+.dashboard-stats {
+    display: none;
 }
 
 /* Task List */
+.card {
+    border: none;
+    padding: 0;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #27272a;
+    padding-bottom: 8px;
+    color: #ffffff;
+}
+
 .list {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
 }
 
 .task-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    border: 1px solid #000000;
+    padding: 12px 14px;
+    background-color: #18181b;
+    border: 1px solid #27272a;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.task-item:hover {
+    border-color: #3f3f46;
 }
 
 .task-item.completed-task {
-    background-color: #f5f5f5;
-    border-color: #888888;
+    background-color: #0f0f11;
+    border-color: #1c1c1f;
+    opacity: 0.6;
 }
 
 .task-info-block {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     flex: 1;
+}
+
+/* Custom Checkbox */
+.task-info-block input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #3f3f46;
+    border-radius: 4px;
+    background-color: transparent;
+    cursor: pointer;
+    display: grid;
+    place-content: center;
+    transition: all 0.15s ease;
+}
+
+.task-info-block input[type="checkbox"]::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    transform: scale(0);
+    transition: 120ms transform ease;
+    box-shadow: inset 10px 10px #ffffff;
+    transform-origin: center;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+.task-info-block input[type="checkbox"]:checked {
+    background-color: #ffffff;
+    border-color: #ffffff;
+}
+
+.task-info-block input[type="checkbox"]:checked::before {
+    transform: scale(1);
+    box-shadow: inset 10px 10px #0c0c0e;
 }
 
 .task-details {
     display: flex;
     flex-direction: column;
-    gap: 2px;
 }
 
 .task-title {
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 600;
+    color: #ffffff;
 }
 
 .task-item.completed-task .task-title {
     text-decoration: line-through;
-    color: #555555;
+    color: #71717a;
 }
 
 .task-meta {
     display: flex;
     align-items: center;
-    gap: 12px;
-}
-
-.status-badge {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-.status-badge.completed {
-    color: #008800;
-}
-
-.status-badge.pending {
-    color: #888800;
+    gap: 8px;
 }
 
 .task-date {
     font-size: 12px;
-    color: #555555;
+    color: #71717a;
 }
 
 .task-actions {
     display: flex;
-    gap: 8px;
+    gap: 12px;
 }
 
 .action-link {
     font-size: 12px;
+    color: #a1a1aa;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.action-link:hover {
+    color: #ffffff;
     text-decoration: underline;
 }
 
-.action-link.delete {
-    color: #cc0000;
+.action-link.delete:hover {
+    color: #ef4444;
 }
 
 .empty-list {
     text-align: center;
-    padding: 20px;
-    border: 1px dashed #000000;
+    padding: 24px;
+    border: 1px dashed #27272a;
+    border-radius: 8px;
     font-size: 14px;
-    color: #555555;
+    color: #71717a;
 }
 
-/* Edit Form buttons */
-.update-actions {
-    display: flex;
-    gap: 8px;
-}
-
-.btn {
-    display: inline-block;
-    padding: 8px 12px;
+/* Logout Button */
+.btn-logout {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
+    color: #ffffff;
+    background-color: transparent;
+    border: 1px solid #27272a;
+    border-radius: 8px;
     text-align: center;
     text-decoration: none;
-    border: 1px solid #000000;
-    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.btn-secondary {
-    background-color: #ffffff;
-    color: #000000;
+.btn-logout:hover {
+    background-color: #18181b;
+    border-color: #3f3f46;
 }
 
-.btn-secondary:hover {
-    background-color: #f0f0f0;
+/* Update Page Actions */
+.update-actions {
+    display: flex;
+    gap: 12px;
 }
 
-@media (max-width: 768px) {
-    .dashboard-grid {
-        grid-template-columns: 1fr;
-    }
-    .dashboard-stats {
-        grid-template-columns: 1fr;
+.btn.btn-secondary {
+    flex: 1;
+    display: inline-block;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #27272a;
+    border-radius: 8px;
+    background-color: transparent;
+    color: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.btn.btn-secondary:hover {
+    background-color: #18181b;
+    border-color: #3f3f46;
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 24px;
     }
 }

@@ -5,8 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Todo Tasks</title>
-    <link rel="stylesheet" href="{% static 'form.css' %}">
+    <title>To Do List - Dashboard</title>
+    <link rel="stylesheet" href="{% static 'form.css' %}?v=2">
 </head>
 
 <body>
@@ -14,104 +14,75 @@
         <!-- Dashboard Header -->
         <header class="dashboard-header">
             <div class="brand">
-                <span class="brand-name">Todo Tasks</span>
+                <h1 class="brand-name">To Do List</h1>
+                <span class="brand-subtitle">Dashboard</span>
             </div>
-            <div class="user-actions">
-                <span class="welcome-msg">Welcome, <strong>{{ request.user.username }}</strong></span>
-                <a href="{% url 'logout' %}" class="btn-logout">Logout</a>
+            <div class="user-info">
+                <span class="welcome-msg">Welcome, {{ request.user.username }}</span>
+                <span class="user-subtitle">Your To Do List</span>
             </div>
         </header>
 
-        <!-- Stats Section -->
-        <div class="dashboard-stats">
-            <div class="stat-card">
-                <span class="stat-label">Total Tasks</span>
-                <span class="stat-value" id="stat-total">0</span>
+        <!-- Add Task Form -->
+        <form method="POST" class="add-task-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="task">Enter to do tasks:</label>
+                <input type="text" id="task" name="task" placeholder="What needs to be done?" required autofocus>
             </div>
-            <div class="stat-card">
-                <span class="stat-label">Pending</span>
-                <span class="stat-value" id="stat-pending">0</span>
+            <div class="form-group">
+                <label for="date">Due date:</label>
+                <input type="date" id="date" name="date" required>
             </div>
-            <div class="stat-card">
-                <span class="stat-label">Completed</span>
-                <span class="stat-value" id="stat-completed">0</span>
-            </div>
-        </div>
+            <button type="submit">Add Task</button>
+        </form>
 
-        <!-- Main Content Grid -->
-        <div class="dashboard-grid">
-            
-            <!-- Left Side: Add Task Form -->
-            <div class="card">
-                <div class="card-title">Create New Task</div>
-                <form method="POST" class="add-task-form">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="task">Task Description</label>
-                        <input type="text" id="task" name="task" placeholder="What needs to be done?" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="date">Deadline</label>
-                        <input type="date" id="date" name="date" required>
-                    </div>
-                    <button type="submit">Add Task</button>
-                </form>
-            </div>
-
-            <!-- Right Side: Tasks List -->
-            <div class="card">
-                <div class="card-title">Your Tasks</div>
-                <ul class="list">
-                    {% for i in c %}
-                        <li class="task-item {% if i.completed %}completed-task{% endif %}">
-                            <div class="task-info-block">
-                                <form method="POST" class="complete-form">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="todo_id" value="{{ i.id }}">
-                                    <input type="checkbox" name="completed" {% if i.completed %}checked{% endif %} onchange="this.form.submit()">
-                                </form>
-                                <div class="task-details">
-                                    <p class="task-title">{{ i.task }}</p>
-                                    <div class="task-meta">
-                                        <span class="status-badge {% if i.completed %}completed{% else %}pending{% endif %}">
-                                            {% if i.completed %}Completed{% else %}Pending{% endif %}
-                                        </span>
-                                        <span class="task-date">
-                                            Deadline: {{ i.date|date:"M d, Y" }}
-                                        </span>
-                                    </div>
+        <!-- Tasks List Section -->
+        <div class="card">
+            <div class="card-title">Your Tasks</div>
+            <ul class="list">
+                {% for i in c %}
+                    <li class="task-item {% if i.completed %}completed-task{% endif %}">
+                        <div class="task-info-block">
+                            <!-- Toggle complete form -->
+                            <form method="POST" style="display: inline; margin: 0; padding: 0; width: auto; flex-direction: row;">
+                                {% csrf_token %}
+                                <input type="hidden" name="todo_id" value="{{ i.id }}">
+                                <input type="checkbox" name="completed" {% if i.completed %}checked{% endif %} onchange="this.form.submit()">
+                            </form>
+                            <div class="task-details">
+                                <p class="task-title">{{ i.task }}</p>
+                                <div class="task-meta">
+                                    <span class="task-date">
+                                        Due: {{ i.date|date:"M d, Y" }}
+                                    </span>
                                 </div>
                             </div>
-                            <div class="task-actions">
-                                <a href="{% url 'update' i.id %}" class="action-link">Edit</a>
-                                <a href="{% url 'delete' i.id %}" class="action-link delete">Delete</a>
-                            </div>
-                        </li>
-                    {% empty %}
-                        <li class="empty-list">No tasks added yet. Create one on the left to get started!</li>
-                    {% endfor %}
-                </ul>
-            </div>
-
+                        </div>
+                        <div class="task-actions">
+                            <a href="{% url 'update' i.id %}" class="action-link">Edit</a>
+                            <a href="{% url 'delete' i.id %}" class="action-link delete">Delete</a>
+                        </div>
+                    </li>
+                {% empty %}
+                    <li class="empty-list">No tasks added yet.</li>
+                {% endfor %}
+            </ul>
         </div>
+
+        <!-- Logout Action -->
+        <a href="{% url 'logout' %}" class="btn-logout">Logout</a>
     </div>
 
-    <!-- Client-side script to calculate statistics -->
+    <!-- Client-side script to auto-populate date -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const totalTasks = document.querySelectorAll('.task-item').length;
-            const completedTasks = document.querySelectorAll('.task-item.completed-task').length;
-            const pendingTasks = totalTasks - completedTasks;
-
-            document.getElementById('stat-total').textContent = totalTasks;
-            document.getElementById('stat-completed').textContent = completedTasks;
-            document.getElementById('stat-pending').textContent = pendingTasks;
-            
             // Set today's date as default for date input
             const dateInput = document.getElementById('date');
             if (dateInput) {
                 const today = new Date().toISOString().split('T')[0];
                 dateInput.setAttribute('min', today);
+                dateInput.value = today;
             }
         });
     </script>
