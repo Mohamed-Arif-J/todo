@@ -3,6 +3,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login, logout
 from . models import Todo
+from django.contrib import messages
 
 # Create your views here.
 def loginpage(request):
@@ -14,6 +15,8 @@ def loginpage(request):
             login(request, c)
             print("Login successful")
             return redirect('dashboard')
+        else:
+            messages.error(request,"invalid password")
     return render(request, 'login.html')
 
 def register(request):
